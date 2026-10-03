@@ -1,0 +1,6 @@
+{
+  "name": "Radio Indonesia",
+  "description": "Aplikasi radio online Indonesia bernuansa vintage klasik dengan pemutar lancar dan stasiun terlengkap.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

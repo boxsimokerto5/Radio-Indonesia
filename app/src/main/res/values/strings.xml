@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Radio Indonesia</string>
+    <string name="vintage_tagline">Gelombang Suara Klasik Indonesia</string>
+    <string name="search_placeholder">Cari nama radio, frekuensi, atau kota…</string>
+    <string name="tab_all">Semua</string>
+    <string name="tab_favorites">Favorit</string>
+    <string name="tab_regions">Wilayah</string>
+    <string name="tab_genres">Genre</string>
+    <string name="now_playing">Sedang Mengudara</string>
+    <string name="live_badge">LIVE ON AIR</string>
+    <string name="buffering">Menghubungkan Saluran…</string>
+    <string name="sleep_timer">Pengatur Waktu Tidur</string>
+    <string name="volume">Volume Suara</string>
+    <string name="share_station">Bagikan Stasiun</string>
+</resources>

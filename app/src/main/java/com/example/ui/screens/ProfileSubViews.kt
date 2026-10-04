@@ -1,6 +1,7 @@
 package com.example.ui.screens
 
 import android.content.Intent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -57,14 +58,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.R
 import com.example.ui.theme.VintageBorderSepia
 import com.example.ui.theme.VintageBorderStrong
 import com.example.ui.theme.VintageGoldOchre
@@ -830,7 +834,14 @@ fun AboutAppDialog(onDismiss: () -> Unit) {
                     }
                 }
 
-                Icon(imageVector = Icons.Filled.Radio, contentDescription = null, tint = VintageTerracotta, modifier = Modifier.size(54.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.img_radio_indonesia_logo),
+                    contentDescription = "Logo Radio Indonesia",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(84.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "Radio Indonesia",

@@ -8,6 +8,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -36,7 +37,6 @@ import androidx.compose.material.icons.filled.GraphicEq
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Radio
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.material.icons.filled.SkipPrevious
@@ -61,6 +61,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -69,6 +70,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.R
 import com.example.model.RadioStation
 import com.example.player.PlaybackStatus
 import com.example.player.PlayerState
@@ -270,18 +272,23 @@ fun VintageFullPlayer(
                             .data(station.favicon)
                             .crossfade(true)
                             .build(),
+                        placeholder = painterResource(id = R.drawable.img_radio_indonesia_logo),
+                        error = painterResource(id = R.drawable.img_radio_indonesia_logo),
+                        fallback = painterResource(id = R.drawable.img_radio_indonesia_logo),
                         contentDescription = "Logo Stasiun ${station.name}",
-                        contentScale = ContentScale.Fit,
+                        contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxSize()
                             .clip(CircleShape)
                     )
                 } else {
-                    Icon(
-                        imageVector = Icons.Filled.Radio,
-                        contentDescription = "Logo Radio",
-                        tint = VintageTextWarmBrown,
-                        modifier = Modifier.size(90.dp)
+                    Image(
+                        painter = painterResource(id = R.drawable.img_radio_indonesia_logo),
+                        contentDescription = "Logo Radio Indonesia",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(CircleShape)
                     )
                 }
 

@@ -6,6 +6,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -61,12 +62,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
 import com.example.player.PlaybackStatus
 import com.example.ui.components.SleepTimerDialog
 import com.example.ui.components.SoundProfileDialog
@@ -209,31 +213,43 @@ fun RadioHomeScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Column {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Image(
+                                painter = painterResource(id = R.drawable.img_radio_indonesia_logo),
+                                contentDescription = "Logo Radio Indonesia",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .border(1.dp, VintageBorderStrong, RoundedCornerShape(10.dp))
+                            )
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Column {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Text(
+                                        text = "RADIO INDONESIA",
+                                        color = VintageTextEspresso,
+                                        fontSize = 19.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        fontFamily = FontFamily.Serif,
+                                        letterSpacing = 1.2.sp
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Box(
+                                        modifier = Modifier
+                                            .size(9.dp)
+                                            .clip(CircleShape)
+                                            .background(if (isPlaying) VintageTerracotta else VintageBorderStrong)
+                                    )
+                                }
                                 Text(
-                                    text = "RADIO INDONESIA",
-                                    color = VintageTextEspresso,
-                                    fontSize = 19.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    fontFamily = FontFamily.Serif,
-                                    letterSpacing = 1.2.sp
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Box(
-                                    modifier = Modifier
-                                        .size(9.dp)
-                                        .clip(CircleShape)
-                                        .background(if (isPlaying) VintageTerracotta else VintageBorderStrong)
+                                    text = "Suara Nusantara • Gelombang Klasik",
+                                    color = VintageTextWarmBrown,
+                                    fontSize = 11.5.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    fontFamily = FontFamily.Serif
                                 )
                             }
-                            Text(
-                                text = "Gelombang Suara Klasik Indonesia",
-                                color = VintageTextWarmBrown,
-                                fontSize = 11.5.sp,
-                                fontWeight = FontWeight.Medium,
-                                fontFamily = FontFamily.Serif
-                            )
                         }
 
                         // Online sync status & refresh button
@@ -430,12 +446,23 @@ fun RadioHomeScreen(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                             ) {
-                                Icon(
-                                    imageVector = if (uiState.selectedTab == MainCategoryTab.FAVORITES) Icons.Filled.Favorite else Icons.Filled.Radio,
-                                    contentDescription = null,
-                                    tint = VintageBorderStrong,
-                                    modifier = Modifier.size(54.dp)
-                                )
+                                if (uiState.selectedTab == MainCategoryTab.FAVORITES) {
+                                    Icon(
+                                        imageVector = Icons.Filled.Favorite,
+                                        contentDescription = null,
+                                        tint = VintageBorderStrong,
+                                        modifier = Modifier.size(54.dp)
+                                    )
+                                } else {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.img_radio_indonesia_logo),
+                                        contentDescription = "Logo Radio Indonesia",
+                                        contentScale = ContentScale.Crop,
+                                        modifier = Modifier
+                                            .size(68.dp)
+                                            .clip(RoundedCornerShape(14.dp))
+                                    )
+                                }
                                 Spacer(modifier = Modifier.height(14.dp))
                                 Text(
                                     text = if (uiState.selectedTab == MainCategoryTab.FAVORITES) "Belum ada stasiun favorit" else "Tidak ada stasiun radio yang cocok",

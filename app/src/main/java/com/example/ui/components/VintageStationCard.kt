@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -22,7 +23,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Radio
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -49,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.R
 import com.example.model.RadioStation
 import com.example.ui.theme.VintageAmberWarm
 import com.example.ui.theme.VintageBorderSepia
@@ -199,27 +201,24 @@ fun VintageStationCard(
                                 .data(station.favicon)
                                 .crossfade(true)
                                 .build(),
+                            placeholder = painterResource(id = R.drawable.img_radio_indonesia_logo),
+                            error = painterResource(id = R.drawable.img_radio_indonesia_logo),
+                            fallback = painterResource(id = R.drawable.img_radio_indonesia_logo),
                             contentDescription = "Logo ${station.name}",
-                            contentScale = ContentScale.Fit,
+                            contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clip(RoundedCornerShape(12.dp))
                         )
                     } else {
-                        Box(
+                        Image(
+                            painter = painterResource(id = R.drawable.img_radio_indonesia_logo),
+                            contentDescription = "Logo Radio Indonesia",
+                            contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clip(RoundedCornerShape(12.dp))
-                                .background(VintageParchmentDark),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.Radio,
-                                contentDescription = "Logo Radio",
-                                tint = VintageTextWarmBrown,
-                                modifier = Modifier.size(42.dp)
-                            )
-                        }
+                        )
                     }
 
                     // Playing / Buffering Badge

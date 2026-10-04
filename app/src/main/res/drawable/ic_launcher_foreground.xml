@@ -1,63 +1,8 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-    <!-- Antenna -->
-    <path
-        android:strokeColor="#E5A83B"
-        android:strokeWidth="2.5"
-        android:strokeLineCap="round"
-        android:pathData="M38,36 L24,20" />
-    <path
-        android:fillColor="#FFC252"
-        android:pathData="M24,20 A2,2 0 1,1 24,19.9 Z" />
-
-    <!-- Radio Body Outline & Chassis -->
-    <path
-        android:fillColor="#3A2216"
-        android:strokeColor="#E5A83B"
-        android:strokeWidth="2"
-        android:pathData="M30,36 L78,36 A6,6 0 0,1 84,42 L84,76 A6,6 0 0,1 78,82 L30,82 A6,6 0 0,1 24,76 L24,42 A6,6 0 0,1 30,36 Z" />
-
-    <!-- Speaker Grill (Left circular perforated grill) -->
-    <path
-        android:fillColor="#22140B"
-        android:strokeColor="#E5A83B"
-        android:strokeWidth="1.5"
-        android:pathData="M42,59 A15,15 0 1,1 42,58.9 Z" />
-    <!-- Grill Slits -->
-    <path
-        android:strokeColor="#8C6239"
-        android:strokeWidth="1.2"
-        android:strokeLineCap="round"
-        android:pathData="M34,54 L50,54 M32,59 L52,59 M34,64 L50,64" />
-
-    <!-- Tuning Dial Window (Right side) -->
-    <path
-        android:fillColor="#150D07"
-        android:strokeColor="#E5A83B"
-        android:strokeWidth="1.2"
-        android:pathData="M61,45 L77,45 A2,2 0 0,1 79,47 L79,57 A2,2 0 0,1 77,59 L61,59 A2,2 0 0,1 59,57 L59,47 A2,2 0 0,1 61,45 Z" />
-    <!-- Tuning Needle -->
-    <path
-        android:strokeColor="#FF3333"
-        android:strokeWidth="1.5"
-        android:pathData="M69,46 L69,58" />
-
-    <!-- Knobs -->
-    <path
-        android:fillColor="#E5A83B"
-        android:pathData="M65,70 A4,4 0 1,1 65,69.9 Z" />
-    <path
-        android:fillColor="#E5A83B"
-        android:pathData="M75,70 A4,4 0 1,1 75,69.9 Z" />
-
-    <!-- Handle -->
-    <path
-        android:strokeColor="#B57D22"
-        android:strokeWidth="2.5"
-        android:strokeLineCap="round"
-        android:pathData="M44,36 C44,30 64,30 64,36" />
-</vector>
-
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="66dp"
+        android:height="66dp"
+        android:drawable="@drawable/img_radio_indonesia_logo"
+        android:gravity="center" />
+</layer-list>

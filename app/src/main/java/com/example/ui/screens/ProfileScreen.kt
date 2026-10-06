@@ -269,7 +269,7 @@ fun ProfileScreen(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // 3. DIBAWAHNYA: Beri Rating, Share Aplikasi, Privacy Policy, Tentang Aplikasi
+        // 3. DIBAWAHNYA: Kebijakan Privasi & Tentang Aplikasi
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -279,40 +279,7 @@ fun ProfileScreen(
             colors = CardDefaults.cardColors(containerColor = VintageParchmentCard)
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
-                // Item 1: Beri Rating Aplikasi
-                ProfileListItem(
-                    icon = Icons.Filled.Star,
-                    iconTint = VintageGoldOchre,
-                    title = "Beri Rating Aplikasi",
-                    subtitle = "Beri apresiasi dan ulasan bintang 5",
-                    onClick = { viewModel.openProfileModal(ProfileModal.RATING) },
-                    testTag = "menu_rating"
-                )
-
-                Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(VintageBorderSepia))
-
-                // Item 2: Share Aplikasi
-                ProfileListItem(
-                    icon = Icons.Filled.Share,
-                    iconTint = VintageTerracotta,
-                    title = "Bagikan Aplikasi",
-                    subtitle = "Ajak kerabat mendengarkan radio klasik",
-                    onClick = {
-                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                            type = "text/plain"
-                            putExtra(
-                                Intent.EXTRA_TEXT,
-                                "Dengarkan siaran radio online dengan Radio Indonesia: https://ais-pre-mn34nbo6g6nashp3g6maz4-95670230943.asia-east1.run.app"
-                            )
-                        }
-                        context.startActivity(Intent.createChooser(shareIntent, "Bagikan Radio Indonesia"))
-                    },
-                    testTag = "menu_share"
-                )
-
-                Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(VintageBorderSepia))
-
-                // Item 3: Kebijakan Privasi
+                // Item 1: Kebijakan Privasi
                 ProfileListItem(
                     icon = Icons.Filled.Policy,
                     iconTint = VintageTextWarmBrown,
@@ -324,7 +291,7 @@ fun ProfileScreen(
 
                 Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(VintageBorderSepia))
 
-                // Item 4: Tentang Aplikasi
+                // Item 2: Tentang Aplikasi
                 ProfileListItem(
                     icon = Icons.Filled.Info,
                     iconTint = VintageTerracotta,

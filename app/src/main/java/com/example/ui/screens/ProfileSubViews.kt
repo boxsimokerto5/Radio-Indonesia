@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -34,6 +35,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Policy
 import androidx.compose.material.icons.filled.Radio
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material.icons.filled.Sync
@@ -43,11 +45,14 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -185,10 +190,30 @@ fun EditProfileDialog(
     }
 }
 
-// Dialog 2: Kalender & Catatan (Google Calendar Connected)
+// Komponen Drag Handle Strip bergaya Google Maps (muncul di bagian tengah atas sheet)
+@Composable
+private fun GoogleMapsSheetDragHandle() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 10.dp, bottom = 6.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .width(42.dp)
+                .height(4.5.dp)
+                .clip(RoundedCornerShape(50))
+                .background(VintageBorderStrong)
+        )
+    }
+}
+
+// Dialog 2: Kalender & Catatan (Google Maps Bottom Sheet Style)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalendarDialog(onDismiss: () -> Unit) {
-    val days = (1..31).toList()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
     var notes by remember {
         mutableStateOf(
             listOf(
@@ -200,92 +225,128 @@ fun CalendarDialog(onDismiss: () -> Unit) {
     }
     var newNoteText by remember { mutableStateOf("") }
 
-    Dialog(onDismissRequest = onDismiss) {
-        Card(
+    ModalBottomSheet(
+        onDismissRequest = onDismiss,
+        sheetState = sheetState,
+        shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
+        containerColor = VintageParchmentCard,
+        tonalElevation = 8.dp,
+        dragHandle = { GoogleMapsSheetDragHandle() },
+        modifier = Modifier.testTag("calendar_dialog")
+    ) {
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp)
-                .clip(RoundedCornerShape(18.dp))
-                .border(1.5.dp, VintageBorderStrong, RoundedCornerShape(18.dp))
-                .testTag("calendar_dialog"),
-            colors = CardDefaults.cardColors(containerColor = VintageParchmentCard)
+                .navigationBarsPadding()
+                .padding(horizontal = 20.dp, vertical = 8.dp)
+                .verticalScroll(rememberScrollState())
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(18.dp)
+            // Header bergaya Google Maps dengan tombol bulat di kanan
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+                Column(modifier = Modifier.weight(1f)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(imageVector = Icons.Filled.CalendarMonth, contentDescription = null, tint = VintageTerracotta)
+                        Icon(
+                            imageVector = Icons.Filled.CalendarMonth,
+                            contentDescription = null,
+                            tint = VintageTerracotta,
+                            modifier = Modifier.size(22.dp)
+                        )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "Kalender & Catatan Acara",
                             color = VintageTextEspresso,
-                            fontSize = 16.sp,
+                            fontSize = 19.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Serif
                         )
                     }
-                    IconButton(onClick = onDismiss, modifier = Modifier.size(28.dp)) {
-                        Icon(imageVector = Icons.Filled.Close, contentDescription = "Tutup", tint = VintageTextEspresso)
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Filled.Sync,
+                            contentDescription = null,
+                            tint = VintageSuccessGreen,
+                            modifier = Modifier.size(14.dp)
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Text(
+                            text = "Tersinkronisasi • Jadwal Siaran Nusantara",
+                            color = VintageSuccessGreen,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.SemiBold
+                        )
                     }
                 }
 
-                Spacer(modifier = Modifier.height(8.dp))
-
-                // Google Calendar status badge
-                Row(
+                // Tombol Close Bulat seperti Google Maps
+                IconButton(
+                    onClick = onDismiss,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(6.dp))
+                        .size(36.dp)
+                        .clip(CircleShape)
                         .background(VintageParchmentDark)
-                        .padding(horizontal = 8.dp, vertical = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .border(1.dp, VintageBorderSepia, CircleShape)
                 ) {
-                    Icon(imageVector = Icons.Filled.Sync, contentDescription = null, tint = VintageSuccessGreen, modifier = Modifier.size(14.dp))
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text(text = "Tersinkronisasi dengan Google Kalender", color = VintageTextWarmBrown, fontSize = 10.5.sp, fontWeight = FontWeight.SemiBold)
+                    Icon(
+                        imageVector = Icons.Filled.Close,
+                        contentDescription = "Tutup",
+                        tint = VintageTextEspresso,
+                        modifier = Modifier.size(18.dp)
+                    )
                 }
+            }
 
-                Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(14.dp))
 
-                // Month header
+            // Kartu Kalender Bulanan
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(VintageParchmentCardElevated)
+                    .border(1.dp, VintageBorderStrong, RoundedCornerShape(16.dp))
+                    .padding(14.dp)
+            ) {
                 Text(
                     text = "Oktober 2026",
                     color = VintageTerracotta,
-                    fontSize = 14.sp,
+                    fontSize = 15.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(10.dp))
 
                 // Days grid mini preview
                 val dayNames = listOf("M", "S", "S", "R", "K", "J", "S")
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
                     dayNames.forEach {
-                        Text(text = it, color = VintageTextMutedSepia, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                        Text(text = it, color = VintageTextMutedSepia, fontSize = 11.5.sp, fontWeight = FontWeight.Bold)
                     }
                 }
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(6.dp))
 
                 // Day numbers (5 rows of 7)
                 for (row in 0..4) {
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 2.dp),
+                        horizontalArrangement = Arrangement.SpaceAround
+                    ) {
                         for (col in 0..6) {
                             val dayNum = row * 7 + col + 1
                             if (dayNum <= 31) {
-                                val isToday = dayNum == 4
+                                val isToday = dayNum == 6
                                 Box(
                                     modifier = Modifier
-                                        .size(24.dp)
+                                        .size(28.dp)
                                         .clip(CircleShape)
                                         .background(if (isToday) VintageTerracotta else Color.Transparent),
                                     contentAlignment = Alignment.Center
@@ -293,81 +354,109 @@ fun CalendarDialog(onDismiss: () -> Unit) {
                                     Text(
                                         text = "$dayNum",
                                         color = if (isToday) Color.White else VintageTextEspresso,
-                                        fontSize = 11.sp,
+                                        fontSize = 12.sp,
                                         fontWeight = if (isToday) FontWeight.Bold else FontWeight.Normal
                                     )
                                 }
                             } else {
-                                Spacer(modifier = Modifier.size(24.dp))
+                                Spacer(modifier = Modifier.size(28.dp))
                             }
                         }
                     }
                 }
+            }
 
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(text = "Catatan Pengingat Siaran:", color = VintageTextEspresso, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Catatan Pengingat Siaran:",
+                color = VintageTextEspresso,
+                fontSize = 13.5.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Serif
+            )
+            Spacer(modifier = Modifier.height(8.dp))
 
-                // Notes list
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(80.dp)
-                        .verticalScroll(rememberScrollState())
-                ) {
-                    notes.forEach { note ->
-                        Text(
-                            text = "• $note",
-                            color = VintageTextWarmBrown,
-                            fontSize = 11.5.sp,
-                            modifier = Modifier.padding(vertical = 2.dp)
-                        )
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(6.dp))
-
-                // Add note input
-                Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    OutlinedTextField(
-                        value = newNoteText,
-                        onValueChange = { newNoteText = it },
-                        placeholder = { Text("Tulis pengingat acara...", color = VintageTextDimSepia, fontSize = 11.sp) },
-                        modifier = Modifier.weight(1f),
-                        singleLine = true,
-                        colors = TextFieldDefaults.colors(
-                            focusedContainerColor = VintageParchmentDark,
-                            unfocusedContainerColor = VintageParchmentDark,
-                            focusedTextColor = VintageTextEspresso,
-                            unfocusedTextColor = VintageTextEspresso
-                        )
-                    )
-                    Spacer(modifier = Modifier.width(6.dp))
-                    IconButton(
-                        onClick = {
-                            if (newNoteText.isNotBlank()) {
-                                notes = notes + newNoteText.trim()
-                                newNoteText = ""
-                            }
-                        },
+            // Notes list
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                notes.forEach { note ->
+                    Row(
                         modifier = Modifier
-                            .size(40.dp)
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(VintageTerracotta)
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(VintageParchmentDark)
+                            .border(0.8.dp, VintageBorderSepia, RoundedCornerShape(10.dp))
+                            .padding(horizontal = 12.dp, vertical = 9.dp),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(imageVector = Icons.Filled.Add, contentDescription = "Tambah", tint = Color.White)
+                        Box(
+                            modifier = Modifier
+                                .size(7.dp)
+                                .clip(CircleShape)
+                                .background(VintageTerracotta)
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(
+                            text = note,
+                            color = VintageTextEspresso,
+                            fontSize = 12.5.sp,
+                            fontWeight = FontWeight.Medium
+                        )
                     }
                 }
             }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Add note input
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                OutlinedTextField(
+                    value = newNoteText,
+                    onValueChange = { newNoteText = it },
+                    placeholder = { Text("Tulis pengingat acara...", color = VintageTextDimSepia, fontSize = 12.sp) },
+                    modifier = Modifier.weight(1f),
+                    singleLine = true,
+                    shape = RoundedCornerShape(12.dp),
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = VintageParchmentDark,
+                        unfocusedContainerColor = VintageParchmentDark,
+                        focusedTextColor = VintageTextEspresso,
+                        unfocusedTextColor = VintageTextEspresso,
+                        focusedIndicatorColor = VintageTerracotta,
+                        unfocusedIndicatorColor = VintageBorderStrong
+                    )
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                IconButton(
+                    onClick = {
+                        if (newNoteText.isNotBlank()) {
+                            notes = notes + newNoteText.trim()
+                            newNoteText = ""
+                        }
+                    },
+                    modifier = Modifier
+                        .size(46.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(VintageTerracotta)
+                ) {
+                    Icon(imageVector = Icons.Filled.Add, contentDescription = "Tambah", tint = Color.White)
+                }
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }
 
-// Dialog 3: Cuaca BMKG
+// Dialog 3: Cuaca BMKG (Google Maps Bottom Sheet Style)
 data class CityWeather(val city: String, val temp: String, val condition: String, val humidity: String)
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WeatherDialog(userCity: String, onDismiss: () -> Unit) {
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
     val weatherData = remember {
         listOf(
             CityWeather("DKI Jakarta", "31°C", "Cerah Berawan", "68%"),
@@ -383,103 +472,183 @@ fun WeatherDialog(userCity: String, onDismiss: () -> Unit) {
         )
     }
 
-    Dialog(onDismissRequest = onDismiss) {
-        Card(
+    ModalBottomSheet(
+        onDismissRequest = onDismiss,
+        sheetState = sheetState,
+        shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
+        containerColor = VintageParchmentCard,
+        tonalElevation = 8.dp,
+        dragHandle = { GoogleMapsSheetDragHandle() },
+        modifier = Modifier.testTag("weather_dialog")
+    ) {
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(14.dp)
-                .clip(RoundedCornerShape(18.dp))
-                .border(1.5.dp, VintageBorderStrong, RoundedCornerShape(18.dp))
-                .testTag("weather_dialog"),
-            colors = CardDefaults.cardColors(containerColor = VintageParchmentCard)
+                .navigationBarsPadding()
+                .padding(horizontal = 20.dp, vertical = 8.dp)
         ) {
-            Column(
+            // Header bergaya Google Maps
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Filled.Cloud,
+                            contentDescription = null,
+                            tint = VintageTerracotta,
+                            modifier = Modifier.size(22.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Prakiraan Cuaca BMKG",
+                            color = VintageTextEspresso,
+                            fontSize = 19.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Serif
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Sumber Data: BMKG Indonesia • Diperbarui Hari Ini",
+                        color = VintageSuccessGreen,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+
+                // Tombol Close Bulat seperti Google Maps
+                IconButton(
+                    onClick = onDismiss,
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .background(VintageParchmentDark)
+                        .border(1.dp, VintageBorderSepia, CircleShape)
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Close,
+                        contentDescription = "Tutup",
+                        tint = VintageTextEspresso,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(14.dp))
+
+            // Primary city card
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(18.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(VintageParchmentDark)
+                    .border(1.2.dp, VintageBorderStrong, RoundedCornerShape(16.dp))
+                    .padding(16.dp)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(imageVector = Icons.Filled.Cloud, contentDescription = null, tint = VintageTerracotta)
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Column {
+                    Column {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Filled.LocationOn,
+                                contentDescription = null,
+                                tint = VintageTerracotta,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
                             Text(
-                                text = "Prakiraan Cuaca BMKG",
+                                text = userCity,
                                 color = VintageTextEspresso,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Serif
                             )
-                            Text(text = "Sumber Data: BMKG Indonesia", color = VintageTextMutedSepia, fontSize = 10.sp)
                         }
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "Cerah Berawan • Kelembaban 68%",
+                            color = VintageTextWarmBrown,
+                            fontSize = 12.sp
+                        )
                     }
-                    IconButton(onClick = onDismiss, modifier = Modifier.size(28.dp)) {
-                        Icon(imageVector = Icons.Filled.Close, contentDescription = "Tutup", tint = VintageTextEspresso)
-                    }
+                    Text(
+                        text = "30°C",
+                        color = VintageTerracotta,
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily.Serif
+                    )
                 }
+            }
 
-                Spacer(modifier = Modifier.height(14.dp))
+            Spacer(modifier = Modifier.height(14.dp))
+            Text(
+                text = "Kota-Kota di Indonesia Lainnya (Geser ke atas untuk melihat semua):",
+                color = VintageTextEspresso,
+                fontSize = 12.5.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.height(8.dp))
 
-                // Primary city card
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(VintageParchmentDark)
-                        .border(1.dp, VintageBorderStrong, RoundedCornerShape(12.dp))
-                        .padding(14.dp)
-                ) {
+            // Cities list
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(280.dp),
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                items(weatherData) { item ->
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(VintageParchmentCardElevated)
+                            .border(0.8.dp, VintageBorderSepia, RoundedCornerShape(10.dp))
+                            .padding(horizontal = 14.dp, vertical = 10.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column {
-                            Text(text = userCity, color = VintageTextEspresso, fontSize = 15.sp, fontWeight = FontWeight.Bold)
+                            Text(
+                                text = item.city,
+                                color = VintageTextEspresso,
+                                fontSize = 13.5.sp,
+                                fontWeight = FontWeight.Bold
+                            )
                             Spacer(modifier = Modifier.height(2.dp))
-                            Text(text = "Cerah Berawan • Kelembaban 68%", color = VintageTextWarmBrown, fontSize = 11.5.sp)
+                            Text(
+                                text = "${item.condition} • Kelembaban ${item.humidity}",
+                                color = VintageTextMutedSepia,
+                                fontSize = 11.sp
+                            )
                         }
-                        Text(text = "30°C", color = VintageTerracotta, fontSize = 28.sp, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Serif)
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(text = "Kota-Kota di Indonesia Lainnya:", color = VintageTextEspresso, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                Spacer(modifier = Modifier.height(6.dp))
-
-                // Cities list
-                LazyColumn(modifier = Modifier.height(180.dp)) {
-                    items(weatherData) { item ->
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 4.dp)
-                                .clip(RoundedCornerShape(6.dp))
-                                .background(VintageParchmentCardElevated)
-                                .padding(horizontal = 10.dp, vertical = 6.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Column {
-                                Text(text = item.city, color = VintageTextEspresso, fontSize = 12.5.sp, fontWeight = FontWeight.SemiBold)
-                                Text(text = "${item.condition} • Lembab ${item.humidity}", color = VintageTextMutedSepia, fontSize = 10.sp)
-                            }
-                            Text(text = item.temp, color = VintageTerracotta, fontSize = 13.5.sp, fontWeight = FontWeight.Bold)
-                        }
+                        Text(
+                            text = item.temp,
+                            color = VintageTerracotta,
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Serif
+                        )
                     }
                 }
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
 
-// Dialog 4: Kalkulator Vintage
+// Dialog 4: Kalkulator Vintage (Google Maps Bottom Sheet Style)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalculatorDialog(onDismiss: () -> Unit) {
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
     var display by remember { mutableStateOf("0") }
     var operand1 by remember { mutableStateOf<Double?>(null) }
     var operator by remember { mutableStateOf<String?>(null) }
@@ -526,118 +695,148 @@ fun CalculatorDialog(onDismiss: () -> Unit) {
         isNewEntry = true
     }
 
-    Dialog(onDismissRequest = onDismiss) {
-        Card(
+    ModalBottomSheet(
+        onDismissRequest = onDismiss,
+        sheetState = sheetState,
+        shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
+        containerColor = VintageParchmentCard,
+        tonalElevation = 8.dp,
+        dragHandle = { GoogleMapsSheetDragHandle() },
+        modifier = Modifier.testTag("calculator_dialog")
+    ) {
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(14.dp)
-                .clip(RoundedCornerShape(18.dp))
-                .border(2.dp, VintageBorderStrong, RoundedCornerShape(18.dp))
-                .testTag("calculator_dialog"),
-            colors = CardDefaults.cardColors(containerColor = VintageParchmentCard)
+                .navigationBarsPadding()
+                .padding(horizontal = 20.dp, vertical = 8.dp)
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(18.dp)
+            // Header bergaya Google Maps
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+                Column(modifier = Modifier.weight(1f)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(imageVector = Icons.Filled.Calculate, contentDescription = null, tint = VintageTerracotta)
+                        Icon(
+                            imageVector = Icons.Filled.Calculate,
+                            contentDescription = null,
+                            tint = VintageTerracotta,
+                            modifier = Modifier.size(22.dp)
+                        )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "Kalkulator Klasik",
                             color = VintageTextEspresso,
-                            fontSize = 16.sp,
+                            fontSize = 19.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Serif
                         )
                     }
-                    IconButton(onClick = onDismiss, modifier = Modifier.size(28.dp)) {
-                        Icon(imageVector = Icons.Filled.Close, contentDescription = "Tutup", tint = VintageTextEspresso)
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                // Display screen
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(52.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(VintageParchmentDark)
-                        .border(1.2.dp, VintageBorderStrong, RoundedCornerShape(8.dp))
-                        .padding(horizontal = 14.dp),
-                    contentAlignment = Alignment.CenterEnd
-                ) {
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = display,
-                        color = VintageTextEspresso,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.Monospace
+                        text = "Alat Hitung Cepat • Siap Digunakan",
+                        color = VintageSuccessGreen,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold
                     )
                 }
 
-                Spacer(modifier = Modifier.height(14.dp))
+                // Tombol Close Bulat seperti Google Maps
+                IconButton(
+                    onClick = onDismiss,
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .background(VintageParchmentDark)
+                        .border(1.dp, VintageBorderSepia, CircleShape)
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Close,
+                        contentDescription = "Tutup",
+                        tint = VintageTextEspresso,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+            }
 
-                val buttonLayout = listOf(
-                    listOf("C", "÷", "×", "-"),
-                    listOf("7", "8", "9", "+"),
-                    listOf("4", "5", "6", "="),
-                    listOf("1", "2", "3", "0")
+            Spacer(modifier = Modifier.height(14.dp))
+
+            // Display screen
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(VintageParchmentDark)
+                    .border(1.5.dp, VintageBorderStrong, RoundedCornerShape(12.dp))
+                    .padding(horizontal = 16.dp),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                Text(
+                    text = display,
+                    color = VintageTextEspresso,
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily.Monospace
                 )
+            }
 
-                buttonLayout.forEach { row ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 3.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        row.forEach { btn ->
-                            val isAction = btn in listOf("C", "÷", "×", "-", "+", "=")
-                            val isAccent = btn == "=" || btn == "C"
+            Spacer(modifier = Modifier.height(14.dp))
 
-                            Box(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .height(44.dp)
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .background(
-                                        if (isAccent) VintageTerracotta else if (isAction) VintageParchmentDark else VintageParchmentCardElevated
-                                    )
-                                    .border(
-                                        1.dp,
-                                        if (isAccent) VintageTerracotta else VintageBorderStrong,
-                                        RoundedCornerShape(8.dp)
-                                    )
-                                    .clickable {
-                                        when (btn) {
-                                            "C" -> onClear()
-                                            "=" -> onEquals()
-                                            "÷", "×", "-", "+" -> onOp(btn)
-                                            else -> onDigit(btn)
-                                        }
-                                    },
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Text(
-                                    text = btn,
-                                    color = if (isAccent) Color.White else VintageTextEspresso,
-                                    fontSize = 17.sp,
-                                    fontWeight = FontWeight.Bold
+            val buttonLayout = listOf(
+                listOf("C", "÷", "×", "-"),
+                listOf("7", "8", "9", "+"),
+                listOf("4", "5", "6", "="),
+                listOf("1", "2", "3", "0")
+            )
+
+            buttonLayout.forEach { row ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    row.forEach { btn ->
+                        val isAction = btn in listOf("C", "÷", "×", "-", "+", "=")
+                        val isAccent = btn == "=" || btn == "C"
+
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(48.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(
+                                    if (isAccent) VintageTerracotta else if (isAction) VintageParchmentDark else VintageParchmentCardElevated
                                 )
-                            }
+                                .border(
+                                    1.dp,
+                                    if (isAccent) VintageTerracotta else VintageBorderStrong,
+                                    RoundedCornerShape(12.dp)
+                                )
+                                .clickable {
+                                    when (btn) {
+                                        "C" -> onClear()
+                                        "=" -> onEquals()
+                                        "÷", "×", "-", "+" -> onOp(btn)
+                                        else -> onDigit(btn)
+                                    }
+                                },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = btn,
+                                color = if (isAccent) Color.White else VintageTextEspresso,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold
+                            )
                         }
                     }
                 }
             }
+
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }

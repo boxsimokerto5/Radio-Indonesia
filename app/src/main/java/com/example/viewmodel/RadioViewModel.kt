@@ -47,6 +47,12 @@ enum class ProfileModal {
 data class RadioUiState(
     val stations: List<RadioStation> = emptyList(),
     val filteredStations: List<RadioStation> = emptyList(),
+    val visibleStations: List<RadioStation> = emptyList(),
+    val hasMoreLockedStations: Boolean = false,
+    val remainingLockedCount: Int = 0,
+    val visibleStationLimit: Int = 20,
+    val stationSwitchCount: Int = 0,
+    val shouldTriggerInterstitial: Boolean = false,
     val availableRegions: List<String> = emptyList(),
     val availableGenres: List<String> = emptyList(),
     val selectedTab: MainCategoryTab = MainCategoryTab.ALL,
@@ -86,6 +92,11 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
     private val _userCity = MutableStateFlow(favoritesRepo.getUserCity())
     private val _activeProfileModal = MutableStateFlow(ProfileModal.NONE)
 
+    // Ad states: initial 20 channels limit & 7 channel switches for interstitial
+    private val _visibleStationLimit = MutableStateFlow(20)
+    private val _stationSwitchCount = MutableStateFlow(0)
+    private val _shouldTriggerInterstitial = MutableStateFlow(false)
+
     val uiState: StateFlow<RadioUiState> = combine(
         combine(
             _rawStations,
@@ -113,8 +124,15 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
             _activeProfileModal
         ) { favIds, bottomTab, name, city, modal ->
             ProfileAndNavState(favIds, bottomTab, name, city, modal)
+        },
+        combine(
+            _visibleStationLimit,
+            _stationSwitchCount,
+            _shouldTriggerInterstitial
+        ) { limit, switchCount, triggerInterstitial ->
+            AdFlowState(limit, switchCount, triggerInterstitial)
         }
-    ) { filters, playerInfo, profileInfo ->
+    ) { filters, playerInfo, profileInfo, adState ->
         val annotatedStations = filters.rawStations.map { station ->
             station.copy(isFavorite = profileInfo.favIds.contains(station.id))
         }
@@ -162,9 +180,19 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
             matchesQuery && matchesTab
         }
 
+        val limitedStations = filtered.take(adState.visibleLimit)
+        val hasMore = filtered.size > adState.visibleLimit
+        val remainingCount = (filtered.size - adState.visibleLimit).coerceAtLeast(0)
+
         RadioUiState(
             stations = annotatedStations,
             filteredStations = filtered,
+            visibleStations = limitedStations,
+            hasMoreLockedStations = hasMore,
+            remainingLockedCount = remainingCount,
+            visibleStationLimit = adState.visibleLimit,
+            stationSwitchCount = adState.switchCount,
+            shouldTriggerInterstitial = adState.triggerInterstitial,
             availableRegions = regions,
             availableGenres = genres,
             selectedTab = filters.tab,
@@ -210,6 +238,12 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
         val userName: String,
         val userCity: String,
         val activeModal: ProfileModal
+    )
+
+    private data class AdFlowState(
+        val visibleLimit: Int,
+        val switchCount: Int,
+        val triggerInterstitial: Boolean
     )
 
     init {
@@ -275,11 +309,31 @@ class RadioViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun playStation(station: RadioStation, openPlayer: Boolean = true) {
+        val previousStationId = player.state.value.currentStation?.id
         favoritesRepo.addRecent(station.id)
         player.playStation(station)
         if (openPlayer) {
             _isFullPlayerVisible.value = true
         }
+
+        // Count station change towards the 7-switch Interstitial trigger
+        if (previousStationId != station.id) {
+            val nextCount = _stationSwitchCount.value + 1
+            if (nextCount >= 7) {
+                _stationSwitchCount.value = 0
+                _shouldTriggerInterstitial.value = true
+            } else {
+                _stationSwitchCount.value = nextCount
+            }
+        }
+    }
+
+    fun consumeInterstitialTrigger() {
+        _shouldTriggerInterstitial.value = false
+    }
+
+    fun unlockMoreStationsByReward() {
+        _visibleStationLimit.value = Int.MAX_VALUE
     }
 
     fun togglePlayPause() {

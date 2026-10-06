@@ -1,5 +1,6 @@
 package com.example.ui.screens
 
+import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -26,6 +27,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
@@ -35,11 +37,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.PlayCircleFilled
 import androidx.compose.material.icons.filled.Radio
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Radio
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -55,6 +60,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -63,6 +69,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -71,7 +78,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.R
+import com.example.ads.IronSourceAdManager
 import com.example.player.PlaybackStatus
+import com.example.ui.components.IronSourceBannerAd
+import com.example.ui.components.IronSourceNativeAdCard
 import com.example.ui.components.SleepTimerDialog
 import com.example.ui.components.SoundProfileDialog
 import com.example.ui.components.VintageFullPlayer
@@ -80,6 +90,7 @@ import com.example.ui.components.VintageStationCard
 import com.example.ui.components.VintageTuningDial
 import com.example.ui.theme.VintageBorderSepia
 import com.example.ui.theme.VintageBorderStrong
+import com.example.ui.theme.VintageGoldOchre
 import com.example.ui.theme.VintageParchmentBg
 import com.example.ui.theme.VintageParchmentCard
 import com.example.ui.theme.VintageParchmentCardElevated
@@ -100,11 +111,23 @@ fun RadioHomeScreen(
     viewModel: RadioViewModel,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val activity = context as? Activity
     val uiState by viewModel.uiState.collectAsState()
     val playerState = uiState.playerState
     val currentStation = playerState.currentStation
     val isPlaying = playerState.status == PlaybackStatus.PLAYING
     val isBuffering = playerState.status == PlaybackStatus.BUFFERING
+
+    // Tampilkan iklan Interstitial (8wyu2fy0qdtbdhef) setiap 7 kali berpindah channel radio
+    LaunchedEffect(uiState.shouldTriggerInterstitial) {
+        if (uiState.shouldTriggerInterstitial) {
+            if (activity != null) {
+                IronSourceAdManager.showInterstitialIfReady(activity)
+            }
+            viewModel.consumeInterstitialTrigger()
+        }
+    }
 
     // Handle back button on "Saya" tab
     BackHandler(enabled = uiState.activeBottomTab == BottomNavTab.SAYA) {
@@ -343,7 +366,8 @@ fun RadioHomeScreen(
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    // Iklan Banner ironSource (76s7uqsiag1z3h4y) tepat di bawah kotak pencarian & di atas Tab
+                    IronSourceBannerAd()
 
                     // Primary Category Tabs: Semua, Favorit, Wilayah, Genre
                     TabRow(
@@ -482,6 +506,8 @@ fun RadioHomeScreen(
                             }
                         }
                     } else {
+                        val stationChunks = uiState.visibleStations.chunked(6)
+
                         LazyVerticalGrid(
                             columns = GridCells.Adaptive(minSize = 155.dp),
                             modifier = Modifier
@@ -497,21 +523,93 @@ fun RadioHomeScreen(
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
-                            items(uiState.filteredStations, key = { it.id }) { station ->
-                                val isThisPlaying = isPlaying && currentStation?.id == station.id
-                                val isThisBuffering = isBuffering && currentStation?.id == station.id
+                            stationChunks.forEachIndexed { chunkIndex, chunk ->
+                                items(chunk, key = { it.id }) { station ->
+                                    val isThisPlaying = isPlaying && currentStation?.id == station.id
+                                    val isThisBuffering = isBuffering && currentStation?.id == station.id
 
-                                VintageStationCard(
-                                    station = station,
-                                    isPlaying = isThisPlaying,
-                                    isBuffering = isThisBuffering,
-                                    onStationClick = {
-                                        viewModel.playStation(station, openPlayer = true)
-                                    },
-                                    onFavoriteToggle = {
-                                        viewModel.toggleFavorite(station.id)
+                                    VintageStationCard(
+                                        station = station,
+                                        isPlaying = isThisPlaying,
+                                        isBuffering = isThisBuffering,
+                                        onStationClick = {
+                                            viewModel.playStation(station, openPlayer = true)
+                                        },
+                                        onFavoriteToggle = {
+                                            viewModel.toggleFavorite(station.id)
+                                        }
+                                    )
+                                }
+
+                                // Sematkan Iklan Native ironSource (qy99lqfqur75u1uy) di sela-sela channel radio
+                                item(
+                                    key = "native_ad_slot_$chunkIndex",
+                                    span = { GridItemSpan(maxLineSpan) }
+                                ) {
+                                    IronSourceNativeAdCard(slotIndex = chunkIndex)
+                                }
+                            }
+
+                            // Tombol "Lihat Lebih Banyak Channel (Tonton Iklan)" untuk Rewarded Ad (bceju1t1vqwf6gq7)
+                            if (uiState.hasMoreLockedStations) {
+                                item(
+                                    key = "unlock_more_channels_reward_button",
+                                    span = { GridItemSpan(maxLineSpan) }
+                                ) {
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 8.dp)
+                                            .clip(RoundedCornerShape(14.dp))
+                                            .background(VintageParchmentCardElevated)
+                                            .border(1.5.dp, VintageTerracotta, RoundedCornerShape(14.dp))
+                                            .padding(16.dp),
+                                        horizontalAlignment = Alignment.CenterHorizontally
+                                    ) {
+                                        Text(
+                                            text = "Masih Ada +${uiState.remainingLockedCount} Channel Radio Nusantara Lainnya",
+                                            color = VintageTextEspresso,
+                                            fontSize = 13.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            fontFamily = FontFamily.Serif,
+                                            textAlign = TextAlign.Center
+                                        )
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                        Text(
+                                            text = "Menampilkan 20 channel pertama. Tonton iklan singkat untuk membuka seluruh stasiun radio.",
+                                            color = VintageTextWarmBrown,
+                                            fontSize = 11.5.sp,
+                                            textAlign = TextAlign.Center
+                                        )
+                                        Spacer(modifier = Modifier.height(10.dp))
+                                        Button(
+                                            onClick = {
+                                                IronSourceAdManager.showRewardedAd(activity) {
+                                                    viewModel.unlockMoreStationsByReward()
+                                                }
+                                            },
+                                            colors = ButtonDefaults.buttonColors(containerColor = VintageTerracotta),
+                                            shape = RoundedCornerShape(10.dp),
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .testTag("reward_unlock_channels_button")
+                                        ) {
+                                            Icon(
+                                                imageVector = Icons.Filled.PlayCircleFilled,
+                                                contentDescription = null,
+                                                tint = Color.White,
+                                                modifier = Modifier.size(20.dp)
+                                            )
+                                            Spacer(modifier = Modifier.width(8.dp))
+                                            Text(
+                                                text = "Lihat Lebih Banyak Channel (Tonton Iklan)",
+                                                color = Color.White,
+                                                fontSize = 12.5.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        }
                                     }
-                                )
+                                }
                             }
                         }
                     }

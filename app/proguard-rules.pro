@@ -19,3 +19,12 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# ironSource LevelPlay Mediation & Meta Audience Network Bidding Adapter
+-keep class com.ironsource.** { *; }
+-keep class com.unity3d.mediation.** { *; }
+-keep class com.ironsource.adapters.** { *; }
+-keep class com.facebook.ads.** { *; }
+-dontwarn com.ironsource.**
+-dontwarn com.facebook.ads.**
+

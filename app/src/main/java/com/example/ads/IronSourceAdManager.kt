@@ -2,9 +2,11 @@ package com.example.ads
 
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import java.io.File
 import com.facebook.ads.AdSettings
 import com.facebook.ads.AudienceNetworkAds
 import com.ironsource.mediationsdk.IronSource
@@ -60,8 +62,31 @@ object IronSourceAdManager {
 
     private val mainHandler = Handler(Looper.getMainLooper())
 
+    /**
+     * Checks whether the device has a valid DRM/GPU render node (/dev/dri/renderD128).
+     * Cloud streaming emulators without a hardware render node trigger Chromium WebView
+     * `E/MESA: Failed to open rendernode: No such file or directory` when ad SDK WebViews spin up.
+     */
+    fun hasHardwareRenderNode(): Boolean {
+        val isEmulator = Build.FINGERPRINT.startsWith("generic") ||
+                Build.FINGERPRINT.lowercase().contains("emulator") ||
+                Build.MODEL.contains("sdk_gphone") ||
+                Build.MODEL.contains("Emulator") ||
+                Build.HARDWARE.contains("ranchu") ||
+                Build.HARDWARE.contains("goldfish") ||
+                Build.PRODUCT.contains("sdk")
+        if (!isEmulator) return true
+        return File("/dev/dri/renderD128").exists()
+    }
+
     fun init(context: Context) {
         if (_isInitialized.value) return
+
+        if (!hasHardwareRenderNode()) {
+            Log.i(TAG, "Cloud emulator without DRM render node detected; using lightweight ad mode to prevent MESA WebView errors.")
+            _isInitialized.value = false
+            return
+        }
 
         val appContext = context.applicationContext
 
@@ -115,6 +140,7 @@ object IronSourceAdManager {
     }
 
     fun onActivityResume(activity: Activity) {
+        if (!_isInitialized.value) return
         try {
             IronSource.onResume(activity)
         } catch (e: Throwable) {
@@ -123,6 +149,7 @@ object IronSourceAdManager {
     }
 
     fun onActivityPause(activity: Activity) {
+        if (!_isInitialized.value) return
         try {
             IronSource.onPause(activity)
         } catch (e: Throwable) {

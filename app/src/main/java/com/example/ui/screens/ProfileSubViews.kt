@@ -981,10 +981,11 @@ fun PrivacyPolicyDialog(onDismiss: () -> Unit) {
                         .verticalScroll(rememberScrollState())
                 ) {
                     Text(
-                        text = "1. Pengumpulan Data\nAplikasi Radio Indonesia tidak mengumpulkan, menjual, atau melacak data pribadi pengguna ke pihak ketiga. Pengaturan profil (nama dan kota) disimpan secara lokal di perangkat Anda.\n\n" +
-                                "2. Akses Jaringan & Audio\nAplikasi menggunakan izin Internet semata-mata untuk memuat daftar stasiun radio dan streaming transmisi audio dari server radio resmi.\n\n" +
-                                "3. Hak Cipta Siaran\nSeluruh hak siar konten audio, logo, dan musik adalah milik masing-masing pemilik stasiun radio terkait.\n\n" +
-                                "4. Keamanan\nKami berkomitmen menjaga pengalaman mendengarkan yang aman, bebas dari pelacakan yang tidak diinginkan.",
+                        text = "1. Penyimpanan Data Lokal\nPengaturan profil pendengar (nama tampilan, kota domisili, daftar stasiun favorit, dan catatan jadwal siaran) disimpan secara lokal di perangkat Anda dan tidak diunggah ke server kami.\n\n" +
+                                "2. Akses Jaringan & Pemutaran Latar Belakang\nAplikasi menggunakan izin Internet (INTERNET & ACCESS_NETWORK_STATE) untuk memuat katalog radio dan memutar streaming audio, serta Layanan Latar Depan (FOREGROUND_SERVICE_MEDIA_PLAYBACK) agar siaran radio tetap berjalan saat Anda membuka aplikasi lain atau mengunci layar.\n\n" +
+                                "3. Layanan Periklanan & ID Iklan (Advertising ID)\nAplikasi ini gratis dan didukung oleh layanan iklan dari Unity LevelPlay (ironSource) serta Meta Audience Network. Mitra periklanan tersebut dapat menggunakan Pengenal Iklan Android (Google Advertising ID), alamat IP sementara, dan diagnostik performa perangkat untuk menampilkan iklan yang relevan, mencegah penipuan, serta mengukur kinerja iklan sesuai pengaturan privasi perangkat Anda.\n\n" +
+                                "4. Hak Cipta Siaran\nSeluruh hak siar konten audio, nama stasiun, logo, dan program siaran adalah milik masing-masing lembaga penyiaran resmi terkait.\n\n" +
+                                "5. Kontrol Privasi Pengguna\nAnda dapat mengatur ulang atau menonaktifkan personalisasi ID Iklan kapan saja melalui menu Pengaturan > Google > Iklan di perangkat Android Anda.",
                         color = VintageTextWarmBrown,
                         fontSize = 12.sp,
                         lineHeight = 17.sp

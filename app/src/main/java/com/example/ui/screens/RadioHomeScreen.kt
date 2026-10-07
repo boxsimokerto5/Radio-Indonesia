@@ -1,7 +1,13 @@
 package com.example.ui.screens
 
+import android.Manifest
 import android.app.Activity
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -33,6 +39,10 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Favorite
@@ -118,6 +128,22 @@ fun RadioHomeScreen(
     val currentStation = playerState.currentStation
     val isPlaying = playerState.status == PlaybackStatus.PLAYING
     val isBuffering = playerState.status == PlaybackStatus.BUFFERING
+
+    val notificationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { _ -> }
+
+    LaunchedEffect(currentStation?.id) {
+        if (currentStation != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val hasPerm = ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+            if (!hasPerm) {
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
 
     // Tampilkan iklan Interstitial (8wyu2fy0qdtbdhef) setiap 7 kali berpindah channel radio
     LaunchedEffect(uiState.shouldTriggerInterstitial) {
@@ -301,73 +327,81 @@ fun RadioHomeScreen(
                         }
                     }
 
-                    // Vintage Analog Tuning Dial
+                    // Vintage Analog Tuning Dial (Sleek compact)
                     VintageTuningDial(
                         tuningFraction = tuningFraction,
                         isLive = isPlaying,
                         modifier = Modifier.padding(horizontal = 16.dp)
                     )
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                    // Posisi Atas (di bawah Kotak FM): Iklan Banner ironSource (76s7uqsiag1z3h4y)
+                    IronSourceBannerAd()
 
-                    // Vintage Search Bar in Parchment
+                    // Posisi Bawah (di atas Tab): Kolom Pencarian Tipis & Ramping (38.dp)
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp)
-                            .clip(RoundedCornerShape(10.dp))
+                            .padding(bottom = 6.dp)
+                            .height(38.dp)
+                            .clip(RoundedCornerShape(8.dp))
                             .background(VintageParchmentCard)
-                            .border(1.2.dp, VintageBorderSepia, RoundedCornerShape(10.dp))
+                            .border(1.1.dp, VintageBorderSepia, RoundedCornerShape(8.dp))
+                            .padding(horizontal = 12.dp),
+                        contentAlignment = Alignment.CenterStart
                     ) {
-                        TextField(
-                            value = uiState.searchQuery,
-                            onValueChange = { viewModel.setSearchQuery(it) },
-                            placeholder = {
-                                Text(
-                                    text = "Cari nama radio, frekuensi, atau kota…",
-                                    color = VintageTextDimSepia,
-                                    fontSize = 13.sp
-                                )
-                            },
-                            leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Filled.Search,
-                                    contentDescription = "Cari",
-                                    tint = VintageTerracotta,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            },
-                            trailingIcon = {
-                                if (uiState.searchQuery.isNotEmpty()) {
-                                    IconButton(onClick = { viewModel.setSearchQuery("") }) {
-                                        Icon(
-                                            imageVector = Icons.Filled.Clear,
-                                            contentDescription = "Hapus Pencarian",
-                                            tint = VintageTextWarmBrown,
-                                            modifier = Modifier.size(18.dp)
-                                        )
-                                    }
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.Search,
+                                contentDescription = "Cari",
+                                tint = VintageTerracotta,
+                                modifier = Modifier.size(17.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Box(
+                                modifier = Modifier.weight(1f),
+                                contentAlignment = Alignment.CenterStart
+                            ) {
+                                if (uiState.searchQuery.isEmpty()) {
+                                    Text(
+                                        text = "Cari nama radio, frekuensi, atau kota…",
+                                        color = VintageTextDimSepia,
+                                        fontSize = 12.sp,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
                                 }
-                            },
-                            colors = TextFieldDefaults.colors(
-                                focusedContainerColor = Color.Transparent,
-                                unfocusedContainerColor = Color.Transparent,
-                                disabledContainerColor = Color.Transparent,
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                                cursorColor = VintageTerracotta,
-                                focusedTextColor = VintageTextEspresso,
-                                unfocusedTextColor = VintageTextEspresso
-                            ),
-                            singleLine = true,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .testTag("search_text_field")
-                        )
+                                BasicTextField(
+                                    value = uiState.searchQuery,
+                                    onValueChange = { viewModel.setSearchQuery(it) },
+                                    singleLine = true,
+                                    textStyle = TextStyle(
+                                        color = VintageTextEspresso,
+                                        fontSize = 12.5.sp,
+                                        fontWeight = FontWeight.Medium
+                                    ),
+                                    cursorBrush = SolidColor(VintageTerracotta),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .testTag("search_text_field")
+                                )
+                            }
+                            if (uiState.searchQuery.isNotEmpty()) {
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Icon(
+                                    imageVector = Icons.Filled.Clear,
+                                    contentDescription = "Hapus Pencarian",
+                                    tint = VintageTextWarmBrown,
+                                    modifier = Modifier
+                                        .size(16.dp)
+                                        .clickable { viewModel.setSearchQuery("") }
+                                )
+                            }
+                        }
                     }
-
-                    // Iklan Banner ironSource (76s7uqsiag1z3h4y) tepat di bawah kotak pencarian & di atas Tab
-                    IronSourceBannerAd()
 
                     // Primary Category Tabs: Semua, Favorit, Wilayah, Genre
                     TabRow(

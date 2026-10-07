@@ -68,8 +68,8 @@ fun VintageTuningDial(
                     )
                 )
             )
-            .border(1.5.dp, VintageBorderStrong, RoundedCornerShape(10.dp))
-            .padding(horizontal = 14.dp, vertical = 9.dp)
+            .border(1.2.dp, VintageBorderStrong, RoundedCornerShape(10.dp))
+            .padding(horizontal = 12.dp, vertical = 6.dp)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth()
@@ -84,15 +84,15 @@ fun VintageTuningDial(
                     Text(
                         text = "FM 88 - 108 MHz",
                         color = VintageTextEspresso,
-                        fontSize = 11.5.sp,
+                        fontSize = 10.5.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Serif
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(6.dp))
                     Text(
                         text = "• GELOMBANG PENDEK",
                         color = VintageTextMutedSepia,
-                        fontSize = 9.5.sp,
+                        fontSize = 9.sp,
                         fontWeight = FontWeight.Medium
                     )
                 }
@@ -100,11 +100,11 @@ fun VintageTuningDial(
                 // Tuning Jewel Light (Illuminates Green / Terracotta)
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    horizontalArrangement = Arrangement.spacedBy(5.dp)
                 ) {
                     Box(
                         modifier = Modifier
-                            .size(9.dp)
+                            .size(8.dp)
                             .clip(CircleShape)
                             .background(
                                 if (isLive) VintageSuccessGreen else VintageBorderStrong
@@ -114,21 +114,21 @@ fun VintageTuningDial(
                     Text(
                         text = if (isLive) "SIARAN TERSAMBUNG" else "MENALA",
                         color = if (isLive) VintageTerracotta else VintageTextWarmBrown,
-                        fontSize = 9.5.sp,
+                        fontSize = 9.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily.Monospace
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(4.dp))
 
-            // Parchment Tuner Scale Window
+            // Parchment Tuner Scale Window (Sleek compact height)
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(38.dp)
-                    .clip(RoundedCornerShape(6.dp))
+                    .height(26.dp)
+                    .clip(RoundedCornerShape(5.dp))
                     .background(
                         Brush.verticalGradient(
                             colors = listOf(
@@ -138,7 +138,7 @@ fun VintageTuningDial(
                             )
                         )
                     )
-                    .border(1.dp, VintageBorderSepia, RoundedCornerShape(6.dp))
+                    .border(1.dp, VintageBorderSepia, RoundedCornerShape(5.dp))
             ) {
                 // Scale markings Canvas
                 Canvas(modifier = Modifier.fillMaxSize().padding(horizontal = 10.dp)) {
@@ -158,14 +158,14 @@ fun VintageTuningDial(
                     for (i in 0..ticks) {
                         val x = (width / ticks) * i
                         val isMajor = i % 5 == 0
-                        val tickHeight = if (isMajor) height * 0.44f else height * 0.22f
+                        val tickHeight = if (isMajor) height * 0.48f else height * 0.24f
                         val yStart = (height - tickHeight) / 2f
 
                         drawLine(
                             color = if (isMajor) VintageTextEspresso else VintageBorderStrong,
                             start = Offset(x, yStart),
                             end = Offset(x, yStart + tickHeight),
-                            strokeWidth = if (isMajor) 1.8f else 1f
+                            strokeWidth = if (isMajor) 1.6f else 1f
                         )
                     }
 
@@ -175,14 +175,14 @@ fun VintageTuningDial(
                         color = VintageTerracotta.copy(alpha = 0.35f),
                         start = Offset(needleX, 2f),
                         end = Offset(needleX, height - 2f),
-                        strokeWidth = 4f,
+                        strokeWidth = 3.5f,
                         cap = StrokeCap.Round
                     )
                     drawLine(
                         color = VintageTerracotta,
                         start = Offset(needleX, 2f),
                         end = Offset(needleX, height - 2f),
-                        strokeWidth = 2f,
+                        strokeWidth = 1.8f,
                         cap = StrokeCap.Round
                     )
                 }
@@ -192,14 +192,14 @@ fun VintageTuningDial(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp, vertical = 3.dp),
+                    .padding(horizontal = 8.dp, vertical = 1.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 listOf("88", "92", "96", "100", "104", "108").forEach { freq ->
                     Text(
                         text = freq,
                         color = VintageTextWarmBrown,
-                        fontSize = 9.5.sp,
+                        fontSize = 8.5.sp,
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.Bold
                     )

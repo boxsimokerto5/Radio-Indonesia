@@ -76,6 +76,14 @@ class VintageRadioPlayer(
                         status = PlaybackStatus.BUFFERING,
                         errorMessage = null
                     )
+                    _state.value.currentStation?.let { st ->
+                        RadioPlaybackService.updatePlaybackNotification(
+                            context = context,
+                            stationName = st.name,
+                            stationRegion = st.displayRegion,
+                            isPlaying = true
+                        )
+                    }
                 }
                 Player.STATE_READY -> {
                     val isPlaying = exoPlayer?.playWhenReady == true
@@ -83,6 +91,14 @@ class VintageRadioPlayer(
                         status = if (isPlaying) PlaybackStatus.PLAYING else PlaybackStatus.PAUSED,
                         errorMessage = null
                     )
+                    _state.value.currentStation?.let { st ->
+                        RadioPlaybackService.updatePlaybackNotification(
+                            context = context,
+                            stationName = st.name,
+                            stationRegion = st.displayRegion,
+                            isPlaying = isPlaying
+                        )
+                    }
                 }
                 Player.STATE_ENDED -> {
                     _state.value = _state.value.copy(status = PlaybackStatus.PAUSED)
@@ -100,6 +116,14 @@ class VintageRadioPlayer(
                 _state.value = _state.value.copy(status = PlaybackStatus.PLAYING, errorMessage = null)
             } else if (exoPlayer?.playbackState == Player.STATE_READY) {
                 _state.value = _state.value.copy(status = PlaybackStatus.PAUSED)
+            }
+            _state.value.currentStation?.let { st ->
+                RadioPlaybackService.updatePlaybackNotification(
+                    context = context,
+                    stationName = st.name,
+                    stationRegion = st.displayRegion,
+                    isPlaying = isPlaying
+                )
             }
         }
 
@@ -233,6 +257,7 @@ class VintageRadioPlayer(
     fun stop() {
         exoPlayer?.stop()
         _state.value = _state.value.copy(status = PlaybackStatus.IDLE)
+        RadioPlaybackService.stopPlaybackService(context)
     }
 
     fun setVolume(volume: Float) {
@@ -314,6 +339,7 @@ class VintageRadioPlayer(
     fun destroy() {
         sleepTimerJob?.cancel()
         visualizerJob?.cancel()
+        RadioPlaybackService.stopPlaybackService(context)
         try {
             exoPlayer?.removeListener(playerListener)
             exoPlayer?.release()

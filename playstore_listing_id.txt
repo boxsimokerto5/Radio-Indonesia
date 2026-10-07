@@ -1,0 +1,13 @@
+Language: id-ID (Bahasa Indonesia)
+Title: Radio Indonesia
+Short Description: Dengarkan siaran radio FM & online seluruh Indonesia bernuansa analog klasik.
+Full Description:
+Radio Indonesia - Suara Nusantara menghadirkan ratusan stasiun radio FM dan online dari berbagai provinsi di seluruh Indonesia dengan tampilan analog klasik yang hangat, ringan, dan mudah digunakan.
+
+Fitur Unggulan:
+• Siaran Radio Seluruh Nusantara: Pilihan channel radio dari DKI Jakarta, Jawa Barat, Jawa Tengah, DI Yogyakarta, Jawa Timur, Bali, Sumatera, Kalimantan, Sulawesi, hingga saluran Nasional.
+• Filter Wilayah & Genre Lengkap: Temukan siaran Pop & Hits, Dangdut, Campursari, Berita & Informasi, Religi & Dakwah, Budaya Daerah, Rock, hingga Nostalgia & Jazz.
+• Tetap Menyala di Latar Belakang: Dengarkan siaran radio tanpa terputus sambil membuka aplikasi pesan atau saat layar ponsel terkunci.
+• 4 Karakter Suara Klasik: Pilihan profil audio Tabung Hangat, Vokal Jernih, Bass Mantap, atau Hi-Fi Alami.
+• Pengatur Waktu Tidur (Sleep Timer): Matikan radio otomatis saat Anda beristirahat.
+• Utilitas Harian: Dilengkapi Kalender & Catatan Jadwal Siaran, Prakiraan Cuaca BMKG, serta Kalkulator cepat di menu profil.

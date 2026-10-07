@@ -1,0 +1,302 @@
+====================================================================
+LANGUAGE: id-ID (Indonesian / Bahasa Indonesia)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Dengarkan siaran radio FM & online seluruh Indonesia bernuansa analog klasik.
+Full Description:
+Radio Indonesia - Suara Nusantara menghadirkan ratusan stasiun radio FM dan online dari berbagai provinsi di seluruh Indonesia dengan tampilan analog klasik yang hangat, ringan, dan mudah digunakan.
+
+Fitur Unggulan:
+• Siaran Radio Seluruh Nusantara: Pilihan channel radio dari DKI Jakarta, Jawa Barat, Jawa Tengah, DI Yogyakarta, Jawa Timur, Bali, Sumatera, Kalimantan, Sulawesi, hingga saluran Nasional.
+• Filter Wilayah & Genre Lengkap: Temukan siaran Pop & Hits, Dangdut, Campursari, Berita & Informasi, Religi & Dakwah, Budaya Daerah, Rock, hingga Nostalgia & Jazz.
+• Tetap Menyala di Latar Belakang: Dengarkan siaran radio tanpa terputus sambil membuka aplikasi pesan atau saat layar ponsel terkunci.
+• 4 Karakter Suara Klasik: Pilihan profil audio Tabung Hangat, Vokal Jernih, Bass Mantap, atau Hi-Fi Alami.
+• Pengatur Waktu Tidur (Sleep Timer): Matikan radio otomatis saat Anda beristirahat.
+• Utilitas Harian: Dilengkapi Kalender & Catatan Jadwal Siaran, Prakiraan Cuaca BMKG, serta Kalkulator cepat di menu profil.
+
+====================================================================
+LANGUAGE: en-US (English - United States / United Kingdom / Global)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Listen to live Indonesian FM & online radio stations with classic analog style.
+Full Description:
+Radio Indonesia - Suara Nusantara brings hundreds of live FM and online radio stations from provinces across Indonesia with a warm, lightweight, and easy-to-use vintage analog interface.
+
+Key Features:
+• Nationwide Indonesian Radio: Stream radio channels from Jakarta, West Java, Central Java, Yogyakarta, East Java, Bali, Sumatra, Kalimantan, Sulawesi, and national broadcasters.
+• Region & Genre Filters: Discover Pop & Hits, Dangdut, Campursari, News & Talk, Religious, Traditional Culture, Rock, and Nostalgia & Jazz stations.
+• Background Playback: Keep listening seamlessly while chatting on messaging apps or when your screen is locked.
+• 4 Classic Sound Profiles: Choose Warm Tube, Clear Vocal, Rich Bass, or Natural Hi-Fi audio modes.
+• Sleep Timer: Automatically turn off the radio while you rest.
+• Built-in Daily Utilities: Includes Broadcast Schedule Calendar & Notes, BMKG Indonesian Weather Forecast, and Quick Calculator.
+
+====================================================================
+LANGUAGE: ms-MY (Malay / Bahasa Melayu - Malaysia, Brunei, Singapore)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Dengar siaran radio FM & online seluruh Indonesia dengan gaya analog klasik.
+Full Description:
+Radio Indonesia - Suara Nusantara membawakan ratusan stesen radio FM dan dalam talian dari seluruh wilayah Indonesia dengan reka bentuk analog klasik yang mesra pengguna dan ringan.
+
+Ciri-ciri Utama:
+• Siaran Radio Seluruh Nusantara: Saluran radio dari Jakarta, Jawa Barat, Jawa Tengah, Yogyakarta, Jawa Timur, Bali, Sumatera, Kalimantan, dan Sulawesi.
+• Penapis Wilayah & Genre: Muzik Pop, Dangdut, Campursari, Berita, Agama & Dakwah, Budaya Daerah, serta Nostalgia & Jazz.
+• Main Latar Belakang: Teruskan mendengar radio semasa membuka aplikasi sembang atau ketika skrin telefon dikunci.
+• 4 Profil Bunyi Klasik: Pilihan audio Tiub Hangat, Vokal Jelas, Bass Mantap, atau Hi-Fi Asli.
+• Pemasa Tidur (Sleep Timer): Hentikan siaran radio secara automatik ketika anda berehat.
+• Utiliti Harian: Dilengkapi Kalendar & Nota Siaran, Ramalan Cuaca BMKG, serta Kalkulator pantas.
+
+====================================================================
+LANGUAGE: ar (Arabic / العربية - Saudi Arabia, UAE, Middle East)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: استمع إلى إذاعات إندونيسيا FM وعبر الإنترنت بتصميم كلاسيكي أنيق.
+Full Description:
+تطبيق Radio Indonesia - Suara Nusantara يجمع مئات محطات الراديو الإندونيسية المباشرة عبر الإنترنت من جميع المقاطعات الإندونيسية بواجهة كلاسيكية دافئة وسهلة الاستخدام.
+
+المميزات الرئيسية:
+• محطات راديو من جميع أنحاء إندونيسيا: جاكرتا، جاوة، بالي، سومطرة، كاليمانتان، وسولاويزي.
+• تصنيف حسب المنطقة والنوع: موسيقى، أخبار، برامج دينية وإسلامية، وثقافة محلية.
+• التشغيل في الخلفية: استمر في الاستماع إلى الراديو أثناء استخدام تطبيقات المراسلة أو عند قفل الشاشة.
+• 4 أنماط صوتية كلاسيكية ومؤقت نوم تلقائي (Sleep Timer).
+• أدوات يومية مدمجة: تقويم وملاحظات، حالة الطقس، وآلة حاسبة سريعة.
+
+====================================================================
+LANGUAGE: zh-CN (Chinese Simplified / 简体中文)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: 收听全印尼FM与在线广播电台，体验经典复古模拟风格。
+Full Description:
+Radio Indonesia - Suara Nusantara 汇集了来自印度尼西亚各省的数百个FM和在线广播电台，采用温暖、轻便且易于使用的复古模拟界面。
+
+主要功能：
+• 全印尼广播覆盖：收听雅加达、西爪哇、中爪哇、日惹、东爪哇、巴厘岛、苏门答腊、加里曼丹和苏拉威西的电台。
+• 地区与流派筛选：流行音乐、当杜特(Dangdut)、新闻资讯、宗教文化、摇滚及怀旧爵士。
+• 后台播放支持：在使用聊天应用或锁屏状态下继续流畅收听广播。
+• 4种经典音效模式与睡眠定时器（Sleep Timer）。
+• 内置实用工具：日历与节目备忘录、印尼BMKG天气预报及快捷计算器。
+
+====================================================================
+LANGUAGE: zh-TW (Chinese Traditional / 繁體中文 - Taiwan, Hong Kong)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: 收聽全印尼FM與線上廣播電台，體驗經典復古類比風格。
+Full Description:
+Radio Indonesia - Suara Nusantara 匯集了來自印尼各省的數百個FM與線上廣播電台，具備溫暖、輕巧且好上手的復古類比介面。
+
+主要特色：
+• 全印尼廣播電台：涵蓋雅加達、爪哇、峇里島、蘇門答臘、加里曼丹與蘇拉威西各大頻道。
+• 地區與音樂類型篩選：流行熱門、Dangdut、新聞資訊、宗教、地方文化與懷舊爵士。
+• 背景播放功能：切換至通訊軟體或螢幕鎖定時仍可持續收聽。
+• 4種經典音質模式與睡眠定時器（Sleep Timer）。
+• 內建日常工具：日曆筆記、印尼BMKG天氣預報與快速計算機。
+
+====================================================================
+LANGUAGE: ja-JP (Japanese / 日本語)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: インドネシア全土のFM・オンラインラジオをクラシックなアナログ風UIで聴こう。
+Full Description:
+Radio Indonesia - Suara Nusantaraは、インドネシア全土の何百ものFMおよびオンラインラジオ局を、温かみのあるクラシックなアナログデザインで楽しめるラジオアプリです。
+
+主な機能：
+• インドネシア全国の放送局：ジャカルタ、ジャワ、バリ、スマトラ、カリマンタン、スラウェシのラジオ局を網羅。
+• 地域・ジャンル別フィルター：ポップ、ダンドゥット、ニュース、伝統音楽、ジャズなどを簡単検索。
+• バックグラウンド再生対応：メッセージアプリを開いている時や画面ロック中も途切れず再生。
+• 4つのクラシック音質モード＆スリープタイマー搭載。
+• 便利な日常ツール：カレンダー＆メモ、BMKG天気予報、電卓機能を内蔵。
+
+====================================================================
+LANGUAGE: ko-KR (Korean / 한국어)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: 클래식 아날로그 감성으로 인도네시아 전역의 FM 및 온라인 라디오를 청취하세요.
+Full Description:
+Radio Indonesia - Suara Nusantara는 인도네시아 전역의 수백 개 FM 및 온라인 라디오 방송국을 따뜻하고 직관적인 빈티지 아날로그 인터페이스로 제공합니다.
+
+주요 기능:
+• 인도네시아 전국 라디오: 자카르타, 자바, 발리, 수마트라, 칼리만탄, 술라웨시 등 주요 방송 청취.
+• 지역 및 장르별 필터: 팝, 당둣(Dangdut), 뉴스, 종교, 전통 문화, 재즈 등 다양한 카테고리.
+• 백그라운드 재생 지원: 메신저 앱을 사용하거나 화면이 잠겨 있어도 끊김 없는 라디오 재생.
+• 4가지 클래식 사운드 프로필 및 취침 예약 타이머(Sleep Timer).
+• 생활 편의 도구: 캘린더 메모, 인도네시아 기상청(BMKG) 날씨 예보 및 계산기 탑재.
+
+====================================================================
+LANGUAGE: es-ES (Spanish / Español - Spain & Latin America)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Escucha emisoras de radio FM y online de toda Indonesia con estilo clásico.
+Full Description:
+Radio Indonesia - Suara Nusantara reúne cientos de emisoras de radio FM y en línea de todas las provincias de Indonesia con una interfaz analógica clásica, ligera y fácil de usar.
+
+Características principales:
+• Emisoras de toda Indonesia: Canales de Yakarta, Java, Bali, Sumatra, Kalimantan y Célebes.
+• Filtros por región y género: Pop, Dangdut, Noticias, Cultura tradicional, Rock y Jazz.
+• Reproducción en segundo plano: Sigue escuchando la radio mientras usas aplicaciones de mensajería o con la pantalla bloqueada.
+• 4 perfiles de sonido clásico y temporizador de apagado (Sleep Timer).
+• Utilidades diarias integradas: Calendario de notas, pronóstico del tiempo BMKG y calculadora.
+
+====================================================================
+LANGUAGE: pt-BR (Portuguese / Português - Brazil & Portugal)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Ouça rádios FM e online de toda a Indonésia com visual analógico clássico.
+Full Description:
+Radio Indonesia - Suara Nusantara traz centenas de estações de rádio FM e online de todas as províncias da Indonésia com uma interface analógica clássica, leve e fácil de usar.
+
+Recursos principais:
+• Rádios de toda a Indonésia: Estações de Jacarta, Java, Bali, Sumatra, Kalimantan e Sulawesi.
+• Filtro por região e gênero: Pop, Dangdut, Notícias, Religião, Cultura regional, Rock e Jazz.
+• Reprodução em segundo plano: Continue ouvindo rádio enquanto usa aplicativos de mensagens ou com a tela bloqueada.
+• 4 perfis de som clássico e temporizador de sono (Sleep Timer).
+• Utilitários integrados: Calendário e notas, previsão do tempo BMKG e calculadora.
+
+====================================================================
+LANGUAGE: fr-FR (French / Français)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Écoutez les radios FM et en ligne d'Indonésie avec un style analogique.
+Full Description:
+Radio Indonesia - Suara Nusantara propose des centaines de stations de radio FM et en ligne de toutes les provinces d'Indonésie dans une interface analogique classique et fluide.
+
+Fonctionnalités principales :
+• Radios de toute l'Indonésie : Jakarta, Java, Bali, Sumatra, Kalimantan et Sulawesi.
+• Filtres par région et genre : Pop, Dangdut, Actualités, Culture traditionnelle, Rock et Jazz.
+• Lecture en arrière-plan : Écoutez la radio tout en utilisant vos applications de messagerie ou lorsque l'écran est verrouillé.
+• 4 profils audio classiques et minuterie de veille (Sleep Timer).
+• Outils pratiques intégrés : Calendrier et notes, météo BMKG et calculatrice.
+
+====================================================================
+LANGUAGE: de-DE (German / Deutsch)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Hören Sie UKW- und Online-Radiosender aus ganz Indonesien im Retro-Design.
+Full Description:
+Radio Indonesia - Suara Nusantara bietet Hunderte von UKW- und Online-Radiosendern aus allen Provinzen Indonesiens mit einer warmen, klassischen analogen Benutzeroberfläche.
+
+Hauptfunktionen:
+• Radiosender aus ganz Indonesien: Jakarta, Java, Bali, Sumatra, Kalimantan und Sulawesi.
+• Filter nach Region und Genre: Pop, Dangdut, Nachrichten, Kultur, Rock und Nostalgie-Jazz.
+• Hintergrundwiedergabe: Hören Sie nahtlos weiter, während Sie Messenger-Apps nutzen oder der Bildschirm gesperrt ist.
+• 4 klassische Klangprofile und Sleep-Timer.
+• Integrierte Werkzeuge: Kalender & Notizen, BMKG-Wettervorhersage und Taschenrechner.
+
+====================================================================
+LANGUAGE: nl-NL (Dutch / Nederlands)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Luister naar FM- en online radiostations uit heel Indonesië in klassieke stijl.
+Full Description:
+Radio Indonesia - Suara Nusantara brengt honderden FM- en online radiostations uit alle provincies van Indonesië samen in een warme, klassieke analoge interface.
+
+Belangrijkste kenmerken:
+• Radio uit heel Indonesië: Zenders uit Jakarta, West-Java, Midden-Java, Yogyakarta, Oost-Java, Bali, Sumatra, Kalimantan en Sulawesi.
+• Regio- en genrefilters: Pop, Dangdut, Campursari, Nieuws, Cultuur, Rock en Nostalgie & Jazz.
+• Achtergrondweergave: Blijf luisteren terwijl u berichten-apps gebruikt of wanneer uw scherm is vergrendeld.
+• 4 klassieke geluidsprofielen en slaaptimer (Sleep Timer).
+• Handige extra's: Kalender & notities, BMKG-weersverwachting en rekenmachine.
+
+====================================================================
+LANGUAGE: ru-RU (Russian / Русский)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Слушайте FM и онлайн-радиостанции всей Индонезии в классическом стиле.
+Full Description:
+Radio Indonesia - Suara Nusantara объединяет сотни FM и онлайн-радиостанций из всех провинций Индонезии в теплом, легком и удобном классическом аналоговом интерфейсе.
+
+Основные возможности:
+• Радио со всей Индонезии: станции Джакарты, Явы, Бали, Суматры, Калимантана и Сулавеси.
+• Фильтры по регионам и жанрам: поп-музыка, дангдут, новости, культура, рок и джаз.
+• Фоновое воспроизведение: продолжайте слушать радио во время общения в мессенджерах или при заблокированном экране.
+• 4 классических звуковых профиля и таймер сна (Sleep Timer).
+• Встроенные инструменты: календарь и заметки, прогноз погоды BMKG и калькулятор.
+
+====================================================================
+LANGUAGE: hi-IN (Hindi / हिन्दी - India)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: क्लासिक एनालॉग स्टाइल में पूरे इंडोनेशिया के FM और ऑनलाइन रेडियो स्टेशन सुनें।
+Full Description:
+Radio Indonesia - Suara Nusantara इंडोनेशिया के सभी प्रांतों से सैकड़ों लाइव FM और ऑनलाइन रेडियो स्टेशन एक आकर्षक और आसान क्लासिक एनालॉग इंटरफ़ेस के साथ प्रस्तुत करता है।
+
+मुख्य विशेषताएं:
+• पूरे इंडोनेशिया के रेडियो चैनल: जकार्ता, जावा, बाली, सुमात्रा, कालिमंतान और सुलावेसी के स्टेशन।
+• क्षेत्र और शैली फ़िल्टर: पॉप, डैंगडुट, समाचार, धार्मिक, पारंपरिक संस्कृति और जैज़।
+• बैकग्राउंड प्लेबैक: मैसेजिंग ऐप चलाते समय या स्क्रीन लॉक होने पर भी बिना रुके रेडियो सुनें।
+• 4 क्लासिक साउंड प्रोफ़ाइल और स्लीप टाइमर (Sleep Timer)।
+• दैनिक उपयोगिताएँ: कैलेंडर और नोट्स, मौसम पूर्वानुमान और कैलकुलेटर।
+
+====================================================================
+LANGUAGE: tr-TR (Turkish / Türkçe)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Klasik analog tasarımla tüm Endonezya FM ve çevrimiçi radyo istasyonlarını dinleyin.
+Full Description:
+Radio Indonesia - Suara Nusantara, Endonezya'nın tüm bölgelerinden yüzlerce canlı FM ve çevrimiçi radyo istasyonunu sıcak ve kullanımı kolay klasik bir analog arayüzle sunar.
+
+Temel Özellikler:
+• Tüm Endonezya Radyoları: Cakarta, Cava, Bali, Sumatra, Kalimantan ve Sulawesi kanalları.
+• Bölge ve Tür Filtreleri: Pop, Dangdut, Haberler, Dini Yayınlar, Yerel Kültür ve Caz.
+• Arka Planda Çalma: Mesajlaşma uygulamalarını kullanırken veya ekran kilitliyken kesintisiz radyo dinleyin.
+• 4 Klasik Ses Profili ve Uyku Zamanlayıcısı (Sleep Timer).
+• Günlük Araçlar: Takvim ve Notlar, Hava Durumu ve Hesap Makinesi.
+
+====================================================================
+LANGUAGE: th-TH (Thai / ไทย)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: ฟังวิทยุ FM และออนไลน์ทั่วอินโดนีเซียด้วยดีไซน์อนาล็อกสุดคลาสสิก
+Full Description:
+Radio Indonesia - Suara Nusantara รวบรวมสถานีวิทยุ FM และวิทยุออนไลน์หลายร้อยสถานีจากทุกจังหวัดทั่วอินโดนีเซีย มาพร้อมอินเทอร์เฟซแบบอนาล็อกคลาสสิกที่อบอุ่นและใช้งานง่าย
+
+ฟีเจอร์เด่น:
+• สถานีวิทยุทั่วอินโดนีเซีย: จาการ์ตา ชวา บาหลี สุมาตรา กาลิมันตัน และสุลาเวสี
+• ตัวกรองตามภูมิภาคและแนวเพลง: ป๊อป ดังดุต ข่าวสาร ศาสนา วัฒนธรรมท้องถิ่น และแจ๊ส
+• เล่นเป็นพื้นหลังได้: ฟังวิทยุต่อเนื่องขณะใช้งานแอปแชทหรือขณะล็อกหน้าจอ
+• โหมดเสียงคลาสสิก 4 รูปแบบ พร้อมตั้งเวลาปิดอัตโนมัติ (Sleep Timer)
+• เครื่องมือประจำวัน: ปฏิทินและบันทึก พยากรณ์อากาศ และเครื่องคิดเลข
+
+====================================================================
+LANGUAGE: vi-VN (Vietnamese / Tiếng Việt)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Nghe đài FM & radio trực tuyến khắp Indonesia với giao diện cổ điển.
+Full Description:
+Radio Indonesia - Suara Nusantara mang đến hàng trăm đài phát thanh FM và trực tuyến từ khắp các tỉnh thành Indonesia với giao diện analog cổ điển ấm áp, nhẹ nhàng và dễ sử dụng.
+
+Tính năng nổi bật:
+• Đài phát thanh toàn Indonesia: Các kênh từ Jakarta, Java, Bali, Sumatra, Kalimantan và Sulawesi.
+• Lọc theo Khu vực & Thể loại: Nhạc Pop, Dangdut, Tin tức, Tôn giáo, Văn hóa vùng miền và Jazz.
+• Phát trong nền: Tiếp tục nghe đài mượt mà khi mở ứng dụng nhắn tin hoặc khi khóa màn hình.
+• 4 chế độ âm thanh cổ điển và Hẹn giờ tắt (Sleep Timer).
+• Tiện ích hàng ngày: Lịch & Ghi chú, Dự báo thời tiết BMKG và Máy tính nhanh.
+
+====================================================================
+LANGUAGE: fil (Filipino / Tagalog - Philippines)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Makinig sa mga FM at online radio station sa buong Indonesia sa klasikong istilo.
+Full Description:
+Ang Radio Indonesia - Suara Nusantara ay naghahatid ng daan-daang live FM at online radio stations mula sa iba't ibang probinsya ng Indonesia na may klasikong analog na disenyo.
+
+Mga Pangunahing Tampok:
+• Radyo sa Buong Indonesia: Mga istasyon mula sa Jakarta, Java, Bali, Sumatra, Kalimantan, at Sulawesi.
+• Filter ayon sa Rehiyon at Genre: Pop, Dangdut, Balita, Relihiyon, Kultura, Rock, at Jazz.
+• Background Playback: Patuloy na makinig habang gumagamit ng messaging apps o kahit naka-lock ang screen.
+• 4 na Klasikong Sound Profile at Sleep Timer.
+• Mga Built-in na Tool: Kalendaryo at Notes, Weather Forecast, at Calculator.
+
+====================================================================
+LANGUAGE: it-IT (Italian / Italiano)
+====================================================================
+App Name / Title: Radio Indonesia
+Short Description: Ascolta le stazioni radio FM e online di tutta l'Indonesia in stile classico.
+Full Description:
+Radio Indonesia - Suara Nusantara riunisce centinaia di stazioni radio FM e online da tutte le province dell'Indonesia con un'interfaccia analogica classica, leggera e intuitiva.
+
+Caratteristiche principali:
+• Radio da tutta l'Indonesia: canali da Giacarta, Giava, Bali, Sumatra, Kalimantan e Sulawesi.
+• Filtri per regione e genere: Pop, Dangdut, Notizie, Cultura tradizionale, Rock e Jazz.
+• Riproduzione in background: continua ad ascoltare la radio mentre usi le app di messaggistica o a schermo bloccato.
+• 4 profili audio classici e timer di spegnimento (Sleep Timer).
+• Utilità integrate: calendario e note, meteo BMKG e calcolatrice.
